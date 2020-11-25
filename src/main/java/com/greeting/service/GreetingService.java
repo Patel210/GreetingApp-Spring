@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Service;
 
 import com.greeting.model.Greeting;
+import com.greeting.model.User;
 
 @Service
 public class GreetingService implements IGreetingService {
@@ -14,8 +15,8 @@ public class GreetingService implements IGreetingService {
 	
 	
 	@Override
-	public Greeting addGreeting() {
-		String message = "Hello World!";
+	public Greeting addGreeting(User user) {
+		String message = String.format(template, (user.toString().isEmpty()) ? "World" : user.toString());
 		return new Greeting(counter.incrementAndGet(), message);
 	}
 
